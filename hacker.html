@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYBER RIDOY</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+  color:#00ff66;
+  font-family:Courier New,monospace;
+}
+
+/* INTRO */
+#intro{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle,#07391c,#010d06 45%,#000);
+}
+
+.introBox{
+  width:92%;
+}
+
+.small{
+  font-size:10px;
+  letter-spacing:4px;
+  opacity:.8;
+}
+
+.logo{
+  margin-top:20px;
+  font-size:clamp(40px,13vw,78px);
+  font-weight:900;
+  letter-spacing:5px;
+  text-shadow:
+    0 0 10px #00ff66,
+    0 0 30px #00ff66,
+    0 0 70px #00ff66;
+}
+
+.introText{
+  margin-top:12px;
+  font-size:9px;
+  letter-spacing:3px;
+}
+
+#enter{
+  margin-top:42px;
+  padding:16px 38px;
+  background:rgba(0,255,102,.07);
+  color:#00ff66;
+  border:1px solid #00ff66;
+  border-radius:4px;
+  font:700 15px Courier New,monospace;
+  letter-spacing:2px;
+  box-shadow:0 0 25px rgba(0,255,102,.35);
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+#enter:active{
+  transform:scale(.94);
+}
+
+
+/* SYSTEM */
+#system{
+  display:none;
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  background:radial-gradient(circle at center,#052a14,#000);
+}
+
+#matrix{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:.25;
+}
+
+
+/* SILHOUETTE */
+.person{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:250px;
+  height:430px;
+  opacity:.15;
+  pointer-events:none;
+  filter:drop-shadow(0 0 30px #00ff66);
+}
+
+.personHead{
+  width:105px;
+  height:105px;
+  background:#000;
+  border-radius:50%;
+  margin:auto;
+}
+
+.personBody{
+  width:215px;
+  height:320px;
+  background:#000;
+  border-radius:50% 50% 12% 12%;
+  margin:-3px auto 0;
+}
+
+
+/* TOP */
+.top{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  border-bottom:1px solid rgba(0,255,102,.25);
+  background:rgba(0,5,2,.85);
+  z-index:50;
+  font-size:9px;
+}
+
+.liveDot{
+  display:inline-block;
+  width:6px;
+  height:6px;
+  margin-right:5px;
+  border-radius:50%;
+  background:#00ff66;
+  box-shadow:0 0 10px #00ff66;
+}
+
+
+/* TITLE */
+.title{
+  position:absolute;
+  top:55px;
+  left:0;
+  right:0;
+  z-index:30;
+  text-align:center;
+  font-size:clamp(25px,8vw,50px);
+  font-weight:900;
+  letter-spacing:5px;
+  text-shadow:
+    0 0 10px #00ff66,
+    0 0 35px #00ff66;
+}
+
+.titleSub{
+  font-size:8px;
+  letter-spacing:3px;
+  margin-top:5px;
+}
+
+
+/* SIDE MENU */
+.menu{
+  position:absolute;
+  top:115px;
+  right:10px;
+  z-index:100;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.menuBtn{
+  width:42px;
+  height:42px;
+  border:1px solid rgba(0,255,102,.55);
+  background:rgba(0,12,5,.85);
+  color:#00ff66;
+  font-size:16px;
+  cursor:pointer;
+  touch-action:manipulation;
+  box-shadow:0 0 12px rgba(0,255,102,.12);
+}
+
+.menuBtn:active{
+  transform:scale(.9);
+}
+
+
+/* CARDS */
+.cards{
+  position:absolute;
+  top:135px;
+  left:4%;
+  right:4%;
+  z-index:25;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+}
+
+.card{
+  padding:9px;
+  min-height:65px;
+  background:rgba(0,9,4,.75);
+  border:1px solid rgba(0,255,102,.28);
+  font-size:8px;
+}
+
+.cardName{
+  margin-bottom:7px;
+  opacity:.75;
+}
+
+.cardValue{
+  color:#fff;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.progress{
+  height:3px;
+  margin-top:7px;
+  background:#03200d;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  background:#00ff66;
+  box-shadow:0 0 8px #00ff66;
+}
+
+
+/* TERMINAL */
+.terminal{
+  position:absolute;
+  left:4%;
+  right:4%;
+  bottom:65px;
+  height:190px;
+  z-index:30;
+  padding:10px;
+  overflow:hidden;
+  background:rgba(0,5,2,.9);
+  border:1px solid rgba(0,255,102,.35);
+  font-size:9px;
+  line-height:1.6;
+  white-space:pre-line;
+}
+
+.terminalTitle{
+  border-bottom:1px solid rgba(0,255,102,.2);
+  padding-bottom:5px;
+  margin-bottom:7px;
+}
+
+
+/* POPUP */
+#window{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:86%;
+  max-width:430px;
+  height:290px;
+  z-index:200;
+  display:none;
+  background:rgba(0,10,4,.96);
+  border:1px solid #00ff66;
+  box-shadow:0 0 45px rgba(0,255,102,.35);
+}
+
+.windowHead{
+  height:42px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 10px;
+  border-bottom:1px solid rgba(0,255,102,.3);
+  font-size:9px;
+}
+
+#closeWindow{
+  background:none;
+  border:0;
+  color:#00ff66;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.windowContent{
+  padding:14px;
+  height:245px;
+  overflow:hidden;
+  font-size:9px;
+  line-height:1.8;
+}
+
+.scan{
+  margin-top:10px;
+  height:5px;
+  background:#03200d;
+}
+
+.scan i{
+  display:block;
+  width:0%;
+  height:100%;
+  background:#00ff66;
+  box-shadow:0 0 10px #00ff66;
+  animation:scanFill 2s linear forwards;
+}
+
+@keyframes scanFill{
+  to{width:100%;}
+}
+
+
+/* SCAN LINE */
+.scanLine{
+  position:absolute;
+  left:0;
+  right:0;
+  height:1px;
+  background:#00ff66;
+  opacity:.35;
+  box-shadow:0 0 15px #00ff66;
+  z-index:15;
+  animation:scanDown 4s linear infinite;
+}
+
+@keyframes scanDown{
+  from{top:-5%}
+  to{top:105%}
+}
+
+
+/* BOTTOM */
+.bottom{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:13px;
+  z-index:60;
+  text-align:center;
+}
+
+.access{
+  padding:10px 20px;
+  background:rgba(0,255,102,.06);
+  border:1px solid rgba(0,255,102,.7);
+  color:#00ff66;
+  font:700 11px Courier New,monospace;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+
+/* MOBILE */
+@media(max-width:650px){
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+    right:62px;
+  }
+
+  .card:nth-child(3){
+    display:none;
+  }
+
+  .terminal{
+    right:62px;
+    height:185px;
+  }
+
+  .menu{
+    top:125px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+
+  <div class="introBox">
+
+    <div class="small">
+      SECURE ACCESS CHANNEL
+    </div>
+
+    <div class="logo">
+      CYBER RIDOY
+    </div>
+
+    <div class="introText">
+      RESTRICTED DIGITAL INTERFACE
+    </div>
+
+    <button id="enter" type="button">
+      ▶ ENTER SYSTEM
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- SYSTEM -->
+<div id="system">
+
+  <canvas id="matrix"></canvas>
+
+  <div class="person">
+    <div class="personHead"></div>
+    <div class="personBody"></div>
+  </div>
+
+  <div class="scanLine"></div>
+
+
+  <!-- TOP -->
+  <div class="top">
+
+    <div>
+      <span class="liveDot"></span>
+      CORE
+    </div>
+
+    <div>
+      CYBER_RIDOY
+    </div>
+
+    <div id="clock">
+      00:00:00
+    </div>
+
+  </div>
+
+
+  <!-- TITLE -->
+  <div class="title">
+
+    CYBER RIDOY
+
+    <div class="titleSub">
+      SECURE DIGITAL CONTROL
+    </div>
+
+  </div>
+
+
+  <!-- SIDE MENU -->
+  <div class="menu">
+
+    <button class="menuBtn" data-page="DATA">⌬</button>
+
+    <button class="menuBtn" data-page="NETWORK">◈</button>
+
+    <button class="menuBtn" data-page="IDENTITY">◎</button>
+
+    <button class="menuBtn" data-page="SECURITY">◆</button>
+
+    <button class="menuBtn" data-page="LOG">▣</button>
+
+  </div>
+
+
+  <!-- STATUS -->
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="cardName">
+        DATA FLOW
+      </div>
+
+      <div class="cardValue">
+        <span id="data">74</span>%
+      </div>
+
+      <div class="progress">
+        <i id="dataBar" style="width:74%"></i>
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="cardName">
+        NETWORK
+      </div>
+
+      <div class="cardValue">
+        <span id="network">81</span>%
+      </div>
+
+      <div class="progress">
+        <i id="networkBar" style="width:81%"></i>
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="cardName">
+        CORE POWER
+      </div>
+
+      <div class="cardValue">
+        <span id="power">89</span>%
+      </div>
+
+      <div class="progress">
+        <i id="powerBar" style="width:89%"></i>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TERMINAL -->
+  <div class="terminal">
+
+    <div class="terminalTitle">
+      CYBER_RIDOY // SYSTEM TERMINAL
+    </div>
+
+    <div id="typing"></div>
+
+  </div>
+
+
+  <!-- POPUP -->
+  <div id="window">
+
+    <div class="windowHead">
+
+      <span id="windowTitle">
+        SYSTEM
+      </span>
+
+      <button id="closeWindow">
+        ×
+      </button>
+
+    </div>
+
+    <div
+      class="windowContent"
+      id="windowContent">
+    </div>
+
+  </div>
+
+
+  <!-- ACCESS -->
+  <div class="bottom">
+
+    <button
+      class="access"
+      id="accessButton">
+
+      [ ACCESS CORE ]
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ENTER SYSTEM */
+
+const enter =
+document.getElementById("enter");
+
+const intro =
+document.getElementById("intro");
+
+const system =
+document.getElementById("system");
+
+enter.onclick=function(){
+
+  intro.style.display="none";
+  system.style.display="block";
+
+  startTyping();
+
+};
+
+
+/* CLOCK */
+
+function updateClock(){
+
+  const d=new Date();
+
+  const h=
+  String(d.getHours()).padStart(2,"0");
+
+  const m=
+  String(d.getMinutes()).padStart(2,"0");
+
+  const s=
+  String(d.getSeconds()).padStart(2,"0");
+
+  document.getElementById("clock")
+  .textContent=h+":"+m+":"+s;
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+
+/* MATRIX */
+
+const canvas=
+document.getElementById("matrix");
+
+const ctx=
+canvas.getContext("2d");
+
+let drops=[];
+
+function resize(){
+
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+
+  drops=
+  Array(
+    Math.floor(canvas.width/14)
+  ).fill(1);
+
+}
+
+resize();
+
+window.addEventListener(
+  "resize",
+  resize
+);
+
+
+function matrix(){
+
+  ctx.fillStyle=
+  "rgba(0,0,0,.07)";
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  ctx.fillStyle="#00ff66";
+
+  ctx.font="14px monospace";
+
+  const chars=
+  "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%";
+
+  for(let i=0;i<drops.length;i++){
+
+    const c=
+    chars[
+      Math.floor(
+        Math.random()*chars.length
+      )
+    ];
+
+    ctx.fillText(
+      c,
+      i*14,
+      drops[i]*14
+    );
+
+    if(
+      drops[i]*14>canvas.height &&
+      Math.random()>.975
+    ){
+      drops[i]=0;
+    }
+
+    drops[i]++;
+
+  }
+
+}
+
+setInterval(matrix,45);
+
+
+/* TERMINAL */
+
+const terminal=
+document.getElementById("typing");
+
+const messages=[
+
+  "[CORE] Initializing secure channel...",
+  "[DATA] Reading virtual data stream...",
+  "[NETWORK] Mapping virtual nodes...",
+  "[IDENTITY] Checking encrypted records...",
+  "[SECURITY] Integrity verification active...",
+  "[ACCESS] Permission layer synchronized...",
+  "[SYSTEM] Monitoring digital activity...",
+  "[CORE] Interface ready."
+
+];
+
+let msg=0;
+
+function startTyping(){
+
+  terminal.textContent="";
+
+  msg=0;
+
+  nextMessage();
+
+}
+
+
+function nextMessage(){
+
+  if(msg>=messages.length){
+
+    setTimeout(
+      startTyping,
+      1800
+    );
+
+    return;
+
+  }
+
+  const text=messages[msg];
+
+  let i=0;
+
+  const timer=
+  setInterval(function(){
+
+    terminal.textContent+=
+    text.charAt(i);
+
+    i++;
+
+    if(i>=text.length){
+
+      clearInterval(timer);
+
+      terminal.textContent+="\n";
+
+      msg++;
+
+      setTimeout(
+        nextMessage,
+        100
+      );
+
+    }
+
+  },18);
+
+}
+
+
+/* LIVE VALUES */
+
+setInterval(function(){
+
+  const data=
+  60+
+  Math.floor(
+    Math.random()*40
+  );
+
+  const network=
+  65+
+  Math.floor(
+    Math.random()*35
+  );
+
+  const power=
+  70+
+  Math.floor(
+    Math.random()*30
+  );
+
+
+  document.getElementById("data")
+  .textContent=data;
+
+  document.getElementById("dataBar")
+  .style.width=data+"%";
+
+
+  document.getElementById("network")
+  .textContent=network;
+
+  document.getElementById("networkBar")
+  .style.width=network+"%";
+
+
+  document.getElementById("power")
+  .textContent=power;
+
+  document.getElementById("powerBar")
+  .style.width=power+"%";
+
+},1200);
+
+
+/* SIDE MENU */
+
+const buttons=
+document.querySelectorAll(".menuBtn");
+
+const windowBox=
+document.getElementById("window");
+
+const windowTitle=
+document.getElementById("windowTitle");
+
+const windowContent=
+document.getElementById("windowContent");
+
+
+const pageText={
+
+DATA:`
+<b>DATA CORE</b><br><br>
+DATA STREAM DETECTED<br>
+PACKET INDEX: ${randomID()}<br>
+BUFFER: ACTIVE<br>
+STORAGE CHANNEL: STABLE<br>
+ENCRYPTED STREAM: ENABLED
+
+<div class="scan">
+<i></i>
+</div>
+`,
+
+NETWORK:`
+<b>NETWORK MAP</b><br><br>
+NODE A — CONNECTED<br>
+NODE B — ROUTING<br>
+NODE C — STANDBY<br>
+SIGNAL PATH — STABLE<br>
+TRAFFIC MONITOR — ACTIVE
+
+<div class="scan">
+<i></i>
+</div>
+`,
+
+IDENTITY:`
+<b>IDENTITY CORE</b><br><br>
+VIRTUAL ID: ${randomID()}<br>
+ACCESS LAYER: VERIFIED<br>
+SESSION: ENCRYPTED<br>
+RECORD STATE: PROTECTED
+
+<div class="scan">
+<i></i>
+</div>
+`,
+
+SECURITY:`
+<b>SECURITY CORE</b><br><br>
+ENCRYPTION — ACTIVE<br>
+FIREWALL — STABLE<br>
+INTEGRITY — VERIFIED<br>
+THREAT MONITOR — ACTIVE<br>
+ACCESS CONTROL — LOCKED
+
+<div class="scan">
+<i></i>
+</div>
+`,
+
+LOG:`
+<b>ACCESS LOG</b><br><br>
+${time()} — CORE INITIALIZED<br>
+${time()} — DATA CHANNEL OPENED<br>
+${time()} — SECURITY CHECK COMPLETE<br>
+${time()} — NETWORK SYNCHRONIZED<br>
+${time()} — SESSION ACTIVE
+
+<div class="scan">
+<i></i>
+</div>
+`
+
+};
+
+
+function randomID(){
+
+  return Math.floor(
+    100000+
+    Math.random()*899999
+  );
+
+}
+
+
+function time(){
+
+  const d=new Date();
+
+  return String(
+    d.getHours()
+  ).padStart(2,"0")
+  +":"+
+  String(
+    d.getMinutes()
+  ).padStart(2,"0")
+  +":"+
+  String(
+    d.getSeconds()
+  ).padStart(2,"0");
+
+}
+
+
+buttons.forEach(function(button){
+
+  button.onclick=function(){
+
+    const page=
+    button.getAttribute("data-page");
+
+    windowTitle.textContent=
+    "CYBER RIDOY // "+page;
+
+    windowContent.innerHTML=
+    pageText[page];
+
+    windowBox.style.display=
+    "block";
+
+  };
+
+});
+
+
+/* CLOSE */
+
+document
+.getElementById("closeWindow")
+.onclick=function(){
+
+  windowBox.style.display="none";
+
+};
+
+
+/* ACCESS CORE */
+
+document
+.getElementById("accessButton")
+.onclick=function(){
+
+  windowTitle.textContent=
+  "CYBER RIDOY // CORE";
+
+  windowContent.innerHTML=`
+
+    <b>CORE ACCESS</b><br><br>
+
+    INITIALIZING VIRTUAL CORE...<br>
+    SYNCHRONIZING DATA...<br>
+    CHECKING SECURITY LAYER...<br>
+    VERIFYING SYSTEM INTEGRITY...<br>
+    CHANNEL ESTABLISHED.<br><br>
+
+    <span style="color:#fff">
+    ACCESS GRANTED
+    </span>
+
+    <div class="scan">
+      <i></i>
+    </div>
+
+  `;
+
+  windowBox.style.display=
+  "block";
+
+};
+
+</script>
+
+</body>
+</html>
